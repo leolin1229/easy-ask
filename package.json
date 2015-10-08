@@ -1,0 +1,23 @@
+{
+  "name": "oh-request",
+  "version": "0.0.1",
+  "description": "A really simple wrapper for native HTTP[S] clients.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leolin1229/oh-request.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "leolin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leolin1229/oh-request/issues"
+  },
+  "homepage": "https://github.com/leolin1229/oh-request#readme",
+  "dependencies": {}
+}
