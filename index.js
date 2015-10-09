@@ -30,7 +30,7 @@ function ask(resolve, reject, options, body) {
 			data = Buffer(data);
 
 			options.headers['Content-Type'] = 'application/json';
-			(!options.headers['Accept']) && (options.headers['Accept'] = 'application/json');
+			(!options.headers['Accept']) && (options.headers['Accept'] = 'application/json,text/plain');
 			// maybe catch exception
 		} else {
 			data = Buffer(data + '');
