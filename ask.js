@@ -7,18 +7,15 @@ function Request(options) {
 	this.protocol = options.protocol || http;
 	this.host = options.host || 'localhost';
 	this.port = options.port || 80;
+	this.timeout = options.timeout || 15000;
 }
-
-/*
-* $.getEx(host,path,params,callback,timeout)
-* $.postEx = function(host,path,params,callback,timeout)
-*/
 
 Request.prototype.request = function(options, body, callback) {
 	var data = null;
 
 	options.host = options.host || this.host;
 	options.port = options.port || this.port;
+	options.timeout = options.timeout || this.timeout;
 	options.headers = options.headers || {};
 	options.expect && (options.headers['Expect'] = '100-Continue');
 	options.path = options.path || '/';
@@ -44,13 +41,24 @@ Request.prototype.request = function(options, body, callback) {
 		options.headers['Content-Length'] = data.length;
 	}
 
+	if (options.timeout) {
+		var id = setTimeout(function() {
+			clearTimeout(id);
+			callback('timeout error!');
+		}, options.timeout);
+	}
+
 	var req = this.protocol.request(options);
 
 	req.on('error', function(err) {
+		clearTimeout(id);
+
 		callback(err);
 	});
 
 	req.on('response', function(res) {
+		clearTimeout(id);
+		
 		res.setEncoding('utf8');
 
 		res.data = '';
