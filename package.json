@@ -1,14 +1,14 @@
 {
-  "name": "oh-request",
+  "name": "easy-ask",
   "version": "0.0.1",
   "description": "A really simple wrapper for native HTTP[S] clients.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./tests/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leolin1229/oh-request.git"
+    "url": "git+https://github.com/leolin1229/easy-ask.git"
   },
   "keywords": [
     "nodejs"
@@ -16,8 +16,8 @@
   "author": "leolin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leolin1229/oh-request/issues"
+    "url": "https://github.com/leolin1229/easy-ask/issues"
   },
-  "homepage": "https://github.com/leolin1229/oh-request#readme",
+  "homepage": "https://github.com/leolin1229/easy-ask#readme",
   "dependencies": {}
 }
