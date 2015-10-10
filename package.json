@@ -1,22 +1,32 @@
 {
-  "name": "easy-ask",
-  "version": "0.0.2",
-  "description": "A really simple wrapper for native HTTP[S] clients.",
+  "name": "oh-request",
+  "version": "1.0.0",
+  "description": "A simple and lightweight module for native HTTP clients.",
+  "tags": [
+    "http",
+    "simple",
+    "lightweight",
+    "util",
+    "request"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "node ./tests/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leolin1229/easy-ask.git"
+    "url": "https://github.com/leolin1229/oh-request.git"
   },
   "keywords": [
     "nodejs"
   ],
   "author": "leolin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/leolin1229/easy-ask/issues"
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=0.8.0"
   },
-  "homepage": "https://github.com/leolin1229/easy-ask#readme"
+  "bugs": {
+    "url": "https://github.com/leolin1229/oh-request/issues"
+  },
+  "homepage": "https://github.com/leolin1229/oh-request#readme"
 }
