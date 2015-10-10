@@ -1,21 +1,21 @@
 var http = require('http'),
 	qs = require('querystring');
 
-function Ask(host, path, options, body) {
+function Request(options, body) {
 	options = options || {};
 
-	options.host = host || 'localhost';
-	options.path = path || '/';
+	options.host = options.host || options.hostname || 'localhost';
+	options.path = options.path || '/';
 	options.port = options.port || 80;
 	options.timeout = options.timeout || 15000;
 	options.method = options.method.toUpperCase() || 'GET';
 
 	return new Promise(function(resolve, reject) {
-		ask(resolve, reject, options, body);
+		request(resolve, reject, options, body);
 	});
 }
 
-function ask(resolve, reject, options, body) {
+function request(resolve, reject, options, body) {
 	var data = null;
 
 	options.headers = options.headers || {};
@@ -24,14 +24,16 @@ function ask(resolve, reject, options, body) {
 
 	if (body) {
 		if (typeof body == 'object') {
+			try {
+				data = JSON.stringify(body);
+				data = Buffer(data, null, 2);
 
-			// maybe catch exception
-			data = JSON.stringify(body);
-			data = Buffer(data);
-
-			options.headers['Content-Type'] = 'application/json';
-			(!options.headers['Accept']) && (options.headers['Accept'] = 'application/json,text/plain');
-			// maybe catch exception
+				options.headers['Content-Type'] = 'application/json';
+				(!options.headers['Accept']) && (options.headers['Accept'] = 'application/json,text/plain');
+			} catch(e) {
+				console.error(e);
+				return ;
+			}
 		} else {
 			data = Buffer(data + '');
 			options.headers['Content-Type'] = 'text/plain';
@@ -47,6 +49,7 @@ function ask(resolve, reject, options, body) {
 			socket.setTimeout(options.timeout);
 			socket.on('timeout', function() {
 				req.abort();
+				reject('Error: timeout');
 			});
 		});
 	}
@@ -56,7 +59,7 @@ function ask(resolve, reject, options, body) {
 	});
 
 	req.on('abort', function() {
-		reject('Error: The request is aborted!')
+		reject('Error: The request was aborted!');
 	});
 
 	req.on('response', function(res) {
@@ -71,7 +74,7 @@ function ask(resolve, reject, options, body) {
 			try {
 				res.body = JSON.parse(res.data);
 			} catch(e) {
-				console.error('Error: Invalid json data!');
+				console.error(e);
 				return ;
 			};
 			resolve(res.data);
@@ -93,4 +96,4 @@ function ask(resolve, reject, options, body) {
 	}
 };
 
-module.exports = Ask;
+module.exports = Request;
