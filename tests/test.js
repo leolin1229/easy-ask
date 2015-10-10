@@ -1,70 +1,27 @@
-var ask = require('../index');
+var request = require('../index');
 
-ask('busi.vip.kankan.com', '/userinfo/getUserInfo', {
+request({
+		host: 'google.com',
 		method: 'GET',
+		path: '/search',
 		query: {
-			respType: 'json'
+			q: 'nodejs'
 		},
 		headers: {
-			'Cookie': {
-				userid: '123455'
-			}
+			'x-foo-bar' : "Hello World"
 		},
-		timeout: 1000
-	})
-	.then(function(data) {
-		console.log(data);
-		return ask('svr.act.vip.kankan.com', '/giftService/saveUserAddress', {
-			method: 'POST',
-			query: {
-				respType: 'json'
-			},
-			timeout: 1000
-		}, {
-			address: 'fafasfaa'
-		});
+		timeout: 3000
 	})
 	.then(function(data) {
 		console.log(data);
 		return Promise.resolve('Bingo');
+	}, function(err) {
+		console.log(err);
+		return Promise.reject('Oh no!');
 	})
 	.then(function(data) {
 		console.log(data);
+	}, function(err) {
+		console.log(err);
 	});
-// var p = new Promise(function(resolve, reject) {
-// 	ask.get('busi.vip.kankan.com', '/userinfo/getUserInfo', {
-// 		query: {
-// 			respType: 'json'
-// 		},
-// 		headers: {
-// 			'Cookie': {
-// 				userid: '123455'
-// 			}
-// 		},
-// 		timeout: 1000
-// 	}, function(err, res) {
-// 		err && console.log(err);
-// 		res && res.data && (res.data = JSON.parse(res.data));
-// 		res && resolve(res.data);
-// 	});
-// });
 
-// p.then(function(val){
-// 	// console.log(val);
-// 	ask.post('svr.act.vip.kankan.com', '/giftService/saveUserAddress', {
-// 		query: {
-// 			respType: 'json'
-// 		},
-// 		timeout: 1000
-// 	},{
-// 		address: 'fasdfadsfa'
-// 	}, function(err, res) {
-// 		err && console.log(err);
-// 		res && res.data && (res.data = JSON.parse(res.data));
-// 		res && console.log(res.data);
-// 		return res.data;
-// 	});
-// }, function() {})
-// .then(function(val) {
-// 	console.log(val);
-// }, function() {});
