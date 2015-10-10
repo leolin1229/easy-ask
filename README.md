@@ -37,7 +37,7 @@ Must be an object that can be consumed by `JSON.stringify` or casted to a string
 #### sample
 
 ```js
-var request = require('../index');
+var request = require('oh-request');
 
 request({
 		host: 'google.com',
