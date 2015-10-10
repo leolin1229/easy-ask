@@ -8,7 +8,7 @@ function Request(options, body) {
 	options.path = options.path || '/';
 	options.port = options.port || 80;
 	options.timeout = options.timeout || 15000;
-	options.method = options.method.toUpperCase() || 'GET';
+	options.method = options.method ? options.method.toUpperCase() : 'GET';
 
 	return new Promise(function(resolve, reject) {
 		request(resolve, reject, options, body);
