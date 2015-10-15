@@ -34,6 +34,10 @@ The `options` parameter must be an object.
 #### body
 Must be an object that can be consumed by `JSON.stringify` or casted to a string, or `null`.
 
+#### return
+If response is ok, the return value which is an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_http_incomingmessage).
+By the way, the data property of return value is the json data from remote server.
+
 #### sample
 
 ```js
@@ -51,15 +55,15 @@ request({
 		},
 		timeout: 3000
 	})
-	.then(function(data) {
-		console.log(data);
+	.then(function(res) {
+		console.log(res.headers); // the property of http.IncomingMessage
 		return Promise.resolve('Bingo');
 	}, function(err) {
 		console.log(err);
 		return Promise.reject('Oh no!');
 	})
-	.then(function(data) {
-		console.log(data);
+	.then(function(res) {
+		console.log(res.data); // the json data from remote server
 	}, function(err) {
 		console.log(err);
 	});
