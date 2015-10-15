@@ -77,7 +77,7 @@ function request(resolve, reject, options, body) {
 				console.error(e);
 				return ;
 			};
-			resolve(res.data);
+			resolve(res);
 		});
 	});
 
