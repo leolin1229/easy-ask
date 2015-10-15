@@ -12,16 +12,15 @@ request({
 		},
 		timeout: 3000
 	})
-	.then(function(data) {
-		console.log(data);
+	.then(function(res) {
+		console.log(res.headers); // the property of http.IncomingMessage
 		return Promise.resolve('Bingo');
 	}, function(err) {
 		console.log(err);
 		return Promise.reject('Oh no!');
 	})
-	.then(function(data) {
-		console.log(data);
+	.then(function(res) {
+		console.log(res.data); // the json data from remote server
 	}, function(err) {
 		console.log(err);
 	});
-
